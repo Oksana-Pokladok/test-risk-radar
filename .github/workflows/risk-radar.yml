@@ -15,7 +15,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: Oksana-Pokladok/riskRadar
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.RISK_RADAR_TOKEN }}
           path: risk-radar
 
       - uses: actions/setup-node@v4
