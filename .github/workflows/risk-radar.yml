@@ -9,6 +9,7 @@ jobs:
   risk-radar:
     runs-on: ubuntu-latest
     permissions:
+      contents: read
       pull-requests: write
 
     steps:
@@ -35,7 +36,7 @@ jobs:
           GITHUB_REPOSITORY: ${{ github.repository }}
           PR_NUMBER: ${{ github.event.pull_request.number }}
         run: |
-          REPORT=$(npx ts-node src/index.ts --github)
+          REPORT=$(npx ts-node src/index.ts --github 2>&1)
           echo "report<<EOF" >> $GITHUB_OUTPUT
           echo "$REPORT" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
