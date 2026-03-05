@@ -1,6 +1,7 @@
 name: Risk Radar
 
 on:
+  push:
   pull_request:
     types: [opened, synchronize, reopened]
 
@@ -40,6 +41,7 @@ jobs:
           echo "EOF" >> $GITHUB_OUTPUT
 
       - name: Post or update PR comment
+        if: github.event_name == 'pull_request'
         uses: actions/github-script@v7
         with:
           script: |
