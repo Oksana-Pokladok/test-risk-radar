@@ -1,5 +1,6 @@
 import { createInvoice, markPaid, Currency } from './invoice';
 import { retryCharge, ChargeResult, RetryConfig, DEFAULT_RETRY_CONFIG } from './retry';
+import { getFlag, Flags, LDUser } from '../flags/launchDarkly';
 
 export interface PaymentRequest {
   userId: string;
@@ -18,7 +19,12 @@ export interface PaymentResult {
 
 export async function processPayment(req: PaymentRequest): Promise<PaymentResult> {
   const invoice = createInvoice(req.amount, req.currency);
-  const config = req.retryConfig ?? DEFAULT_RETRY_CONFIG;
+
+  const user: LDUser = { key: req.userId };
+  const retryEnabled = getFlag(Flags.BILLING_RETRY, user, true);
+  const config = retryEnabled
+    ? (req.retryConfig ?? DEFAULT_RETRY_CONFIG)
+    : { ...DEFAULT_RETRY_CONFIG, maxAttempts: 1 };
 
   const { finalResult } = await retryCharge(req.chargeFn, config);
 
