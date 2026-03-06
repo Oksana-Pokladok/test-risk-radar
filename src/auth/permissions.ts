@@ -1,8 +1,8 @@
 export type Role = "admin" | "editor" | "viewer";
 
 const ROLE_PERMISSIONS: Record<Role, string[]> = {
-  admin: ["read", "write", "delete"],
-  editor: ["read", "write"],
+  admin: ["read", "write", "delete", "billing"],
+  editor: ["read", "write", "billing"],
   viewer: ["read"],
 };
 

@@ -28,4 +28,5 @@ export const Flags = {
   ANNUAL_BILLING: 'annual-billing',
   USAGE_BASED_PRICING: 'usage-based-pricing',
   SELF_SERVE_ENTERPRISE: 'self-serve-enterprise',
+  BILLING_RETRY: 'billing-retry',
 } as const;
