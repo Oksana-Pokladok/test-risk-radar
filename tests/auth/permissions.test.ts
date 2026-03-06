@@ -36,6 +36,6 @@ test("viewer cannot access billing", () => {
   assert.equal(can("viewer", "billing"), false);
 });
 
-test("unknown role returns false", () => {
+test("unknown role returns false updated", () => {
   assert.equal(can("unknown" as any, "read"), false);
 });
