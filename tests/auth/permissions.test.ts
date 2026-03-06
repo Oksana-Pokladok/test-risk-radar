@@ -23,3 +23,19 @@ test("viewer can only read", () => {
 test("unknown action returns false", () => {
   assert.equal(can("admin", "publish"), false);
 });
+
+test("editor can access billing", () => {
+  assert.equal(can("editor", "billing"), true);
+});
+
+test("admin can access billing", () => {
+  assert.equal(can("admin", "billing"), true);
+});
+
+test("viewer cannot access billing", () => {
+  assert.equal(can("viewer", "billing"), false);
+});
+
+test("unknown role returns false", () => {
+  assert.equal(can("unknown" as any, "read"), false);
+});
